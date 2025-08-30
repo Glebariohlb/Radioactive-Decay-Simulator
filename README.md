@@ -32,7 +32,7 @@ These tools are used only in the build process and are not distributed with the 
 
 ## Использование установщика
 
-Данный установщик собран с помощью **бесплатной версии Inno Setup Compiler** и распространяется в соответсвии с условиями [free license]([https://jrsoftware.org/islicense.php](https://jrsoftware.org/files/is/license.txt)).
+Данный установщик собран с помощью **бесплатной версии Inno Setup Compiler** и распространяется в соответсвии с условиями [free license]([https://jrsoftware.org/files/is/license.txt]).
 
 ### Разрешенное использование:
 - ✅ Некоммерческое распространение
