@@ -66,7 +66,7 @@ These tools are used only in the build process and are not distributed with the 
 - **Можно продавать** ✅
 - **Можно использовать коммерчески** ✅
 
-### Установщик (Setup_Radioactive Decay Simulator.exe с Inno Setup)  
+### Установщик (Setup_Radioactive.Decay.Simulator.exe с Inno Setup)  
 - Лицензия: Inno Setup Free License
 - **Нельзя продавать** ❌
 - **Только некоммерческое использование** ❌
