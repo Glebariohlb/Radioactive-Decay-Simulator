@@ -22,8 +22,13 @@
 
 ### Сторонние инструменты
 
-This project uses:
+Этот проект использует:
 - **Inno Setup** by Jordan Russell - for Windows installer creation
 - **PyInstaller** - for packaging Python applications
 
 These tools are used only in the build process and are not distributed with the application.
+
+## Важно!
+Установщик собран с помощью бесплатной версии Inno Setup Compiller
+и может использоваться только для некоммерческого распространения!!
+Для коммерческого использования соберите установщик самостоятельно!!
