@@ -61,7 +61,7 @@ These tools are used only in the build process and are not distributed with the 
 
 ## Важно: Различие между программой и установщиком
 
-### Программа (исходный код и Radioactive Decay Simulator.exe)
+### Программа (исходный код)
 - Лицензия: MIT
 - **Можно продавать** ✅
 - **Можно использовать коммерчески** ✅
