@@ -1,26 +1,35 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.widgets import Slider, Button
+from matplotlib.widgets import Slider, Button, RadioButtons
 
-initial_N_0 = 100000 # Начальное кол-во ядер
-lambda_ = 0.1        # Постоянная распада
-time_steps = 50      # Кол-во шагов за N-ую единицу времени
-show_theory = True   # Изначальное значение показа теоретической прямой
+isotopes = {
+    'Произвольный': {'lambda': 0.1, 'N0': 100000},
+    'Уран-238': {'lambda': 0.01, 'N0': 100000},
+    'Радий-226': {'lambda': 0.05, 'N0': 100000},
+    'Кобальт-60': {'lambda': 0.15, 'N0': 100000},
+    'Йод-131': {'lambda': 0.25, 'N0': 100000},
+}
+
+initial_isotope = 'Произвольный'
+initial_N_0 = isotopes[initial_isotope]['N0']
+lambda_ = isotopes[initial_isotope]['lambda']
+time_steps = 50
+show_theory = True
 
 fig, ax = plt.subplots()
-fig.set_size_inches(7.5, 5.3)
-plt.subplots_adjust(bottom=0.35)
+fig.set_size_inches(8.0, 5.5)
+plt.subplots_adjust(left=0.22, bottom=0.35)
 
 #Функция, симулирующая распад
 def simulate_decay(N_0, lambda_val):
-    N_current = N_0
-    N_list = []
-    for t in range(time_steps):
-        random_numbers = np.random.rand(N_current)
-        decayed = np.sum(random_numbers < lambda_val)
-        N_current -= decayed
-        N_list.append(N_current)
-    return N_list
+  N_current = N_0
+  N_list = []
+  for t in range(time_steps):
+      random_numbers = np.random.rand(N_current)
+      decayed = np.sum(random_numbers < lambda_val)
+      N_current -= decayed
+      N_list.append(N_current)
+  return N_list
 
 #Функция, создающая теоретическую прямую
 def simulate_theory(N_0, lambda_val, time_steps):
@@ -44,7 +53,7 @@ ax.grid(True)
 ax.set_ylim(0, initial_N_0)
 
 #Слайдер, меняющий значение lambda_
-slider_lambda_ax = plt.axes([0.2, 0.1, 0.65, 0.03])
+slider_lambda_ax = plt.axes([0.25, 0.1, 0.65, 0.03])
 lambda_slider = Slider( #Слайдер, меняющий значение lambda_
     ax=slider_lambda_ax,
     label='λ',
@@ -54,7 +63,7 @@ lambda_slider = Slider( #Слайдер, меняющий значение lambd
 )
 
 #Слайдер, меняющий значение N_0 (изначального кол-ва ядер)
-N_slider_ax = plt.axes([0.2, 0.05, 0.65, 0.03])
+N_slider_ax = plt.axes([0.25, 0.05, 0.65, 0.03])
 N_slider = Slider(
     ax = N_slider_ax,
     label='N₀',
@@ -63,6 +72,10 @@ N_slider = Slider(
     valinit=initial_N_0,
     valstep=100
 )
+
+isotope_ax = plt.axes([0.01, 0.02, 0.20, 0.20])
+isotope_radio = RadioButtons(isotope_ax, list(isotopes.keys()), active=list(isotopes.keys()).index(initial_isotope))
+isotope_ax.set_title('Изотоп')
 
 theory_button_ax = plt.axes([0.35, 0.155, 0.35, 0.06])
 theory_button = Button(theory_button_ax, 'Скрыть теоретическую прямую', color='lightblue')
@@ -84,6 +97,15 @@ def update(val):
     ax.set_ylim(0, new_N_0)
     fig.canvas.draw_idle()
 
+
+# Функция обработки выбора изотопа
+def select_isotope(label):
+    data = isotopes[label]
+    # Устанавливаем значения слайдеров в соответствии с выбранным изотопом.
+    # Сами слайдеры вызовут update и перерисуют график.
+    N_slider.set_val(data['N0'])
+    lambda_slider.set_val(data['lambda'])
+
 #Функция, отвечающая за показ теоретической прямой
 def toggle_theory(event):
     global show_theory
@@ -103,6 +125,7 @@ def toggle_theory(event):
 lambda_slider.on_changed(update)
 N_slider.on_changed(update)
 theory_button.on_clicked(toggle_theory)
+isotope_radio.on_clicked(select_isotope)
 
 fig.canvas.manager.set_window_title("Radioactive Decay Simulator v1.0")
 
