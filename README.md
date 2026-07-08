@@ -1,7 +1,7 @@
 # Radioactive Decay Simulator
 
 ## Описание
-Интерактивный симулятор радиоактивного распада с графическим интерфейсом. Написан на Python с использованием Matplotlib, NumPy. Сейчас - прототип без изотопов
+Интерактивный симулятор радиоактивного распада с графическим интерфейсом. Написан на Python с использованием Matplotlib, NumPy
 
 ### Build Tools
 - **PyInstaller** - Application packaging
